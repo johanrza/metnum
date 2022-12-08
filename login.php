@@ -1,3 +1,29 @@
+<?php
+session_start();
+if (isset($_SESSION["login"])) {
+  header("Location: g");
+  exit;
+}
+
+// jika button di klik
+if (isset($_GET["login"])) {
+  $nama = $_GET["nama"];
+  $alamat = $_GET["alamat"];
+  $noHp = $_GET["hp"];
+  $kerjaan = $_GET["pekerjaan"];
+
+  setcookie("__nn__", $nama);
+  setcookie("_adss__", $alamat);
+  setcookie("p", $noHp);
+  setcookie("_jbjb_", $kerjaan);
+
+  $_SESSION["login"] = true;
+  header("Location: g");
+  exit;
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -35,22 +61,22 @@
                 <h3>Form <strong>Login</strong></h3>
                 <p class="mb-4">Isi data formulir dibawah ini, untuk lanjut ke perhitungan Metode Gauss Jordan</p>
               </div>
-              <form action="#" method="post">
+              <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="GET">
                 <div class="form-group">
                   <label for="nama">Nama Lengkap</label>
-                  <input type="text" class="form-control" id="nama">
+                  <input type="text" name="nama" class="form-control" id="nama">
                 </div>
                 <div class="form-group">
                   <label for="alamat">Alamat</label>
-                  <input type="text" class="form-control" id="alamat">
+                  <input type="text" name="alamat" class="form-control" id="alamat">
                 </div>
                 <div class="form-group">
                   <label for="no">Nomor HP</label>
-                  <input type="number" class="form-control" id="no">
+                  <input type="number" name="hp" class="form-control" id="no">
                 </div>
                 <div class="form-group mb-4">
                   <label for="kerja">Pekerjaan</label>
-                  <input type="text" class="form-control" id="kerja">
+                  <input type="text" name="pekerjaan" class="form-control" id="kerja">
                 </div>
 
                 <!-- <div class="d-flex mb-5 align-items-center">
@@ -61,7 +87,7 @@
                   <span class="ml-auto"><a href="#" class="forgot-pass">Forgot Password</a></span>
                 </div> -->
 
-                <input type="submit" value="Kirim" class="btn text-white btn-block btn-primary">
+                <input type="submit" value="Kirim" name="login" class="btn text-white btn-block btn-primary">
               </form>
             </div>
           </div>

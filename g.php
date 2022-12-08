@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["login"])) {
+  header("Location: login");
+  exit;
+}
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -70,12 +81,13 @@ $koefisien = array(array());
 function kesimpulan($jumlah_persamaan)
 {
   global $koefisien;
-  echo 'Sehingga: ';
+  echo 'Sehingga: <br>';
+  $persediaan = ['Keramik = ', 'Besi = ', 'Bahan Cor = '];
   for ($i = 0; $i < $jumlah_persamaan; $i++) {
-    echo '<br>X<sub>' . $i . '</sub>: ';
+    echo $persediaan[$i];
     for ($j = 0; $j < $jumlah_persamaan + 1; $j++) {
       if ($j == $jumlah_persamaan) {
-        echo $koefisien[$i][$j];
+        echo $koefisien[$i][$j] . '<br>';
       }
     }
   }
@@ -95,7 +107,7 @@ function buatArray($jumlah_persamaan)
 
 function tampilkanMatrik($koefisien)
 {
-  echo '<table id="hasil">';
+  echo '<table class="w-25" id="hasil">';
   $rows = count($koefisien);
 
   for ($i = 0; $i < $rows; $i++) {
@@ -147,14 +159,19 @@ function ubah($persamaan)
   <header id="header" class="header d-flex align-items-center">
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="./" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>Kijing<span>.</span></h1>
       </a>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="#"><svg xmlns="http://www.w3.org/2000/svg" class="pe-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <li><a href="./#home">Home</a></li>
+          <li><a href="./#objek">Objek Permasalahan</a></li>
+          <li><a href="./#petunjuk">Petunjuk Penggunaan</a></li>
+          <li><a href="./#hasil">Hasil Produk</a></li>
+          <li><a href="./#team">Pengembang</a></li>
+          <li><a href="keluar"><svg xmlns="http://www.w3.org/2000/svg" class="pe-1" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
                 <path d="M7 12h14l-3 -3m0 6l3 -3"></path>
@@ -178,9 +195,13 @@ function ubah($persamaan)
           <div class="row d-flex justify-content-center">
             <div class="col-lg-6 text-center">
               <h2>Metode Gauss Jordan</h2>
-              <p>Odio et unde deleniti. Deserunt numquam exercitationem. Officiis quo odio sint voluptas consequatur ut
-                a odio voluptatem. Sit dolorum debitis veritatis natus dolores. Quasi ratione sint. Sit quaerat ipsum
-                dolorem.</p>
+              <p>Kijing dengan ukuran besar (150 x 60) membutuhkan 15 buah keramik, 12 meter besi, dan 12 total campuran bahan cor (2 : 4 : 6).</p>
+              <p>
+                Kijing dengan ukuran sedang (120 x 40) membutuhkan 10 buah keramik, 6 meter besi, dan 6 total campuran bahan cor (1 : 2 : 3).
+              </p>
+              <p>
+                Kijing dengan ukuran kecil (80 x 40) membutuhkan 6 buah keramik, 2 meter besi, dan 3 total campuran bahan cor (0,5 : 1 : 1,5)
+              </p>
             </div>
           </div>
         </div>
@@ -188,7 +209,7 @@ function ubah($persamaan)
       <nav>
         <div class="container">
           <ol>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="./">Home</a></li>
             <li>Gauss Jordan</li>
           </ol>
         </div>
@@ -204,153 +225,177 @@ function ubah($persamaan)
           <div class="col-lg-8">
             <div class="portfolio-description">
               <h2>Perhitungan Gauss Jordan</h2>
+              <h6 class="mb-3">Masukan jumlah bahan</h6>
               <form action="<?php $_SERVER['PHP_SELF'] ?>" method="GET">
-                <div class="row g-3 align-items-center">
-                  <!-- ini yang Baru -->
-                  <!-- Persamaan 1 -->
-                  <div class="col-auto">
-                    <label for="b1k1" class="col-form-label">Persamaan 1</label>
-                  </div>
-                  <div class="col-auto">
-                    <input type="text" name="var00" class="form-control text-center" size="1" value="15" aria-describedby="KijingBesar" readonly>
-                  </div>
-                  <div class="col-auto">
-                    <span id="KijingBesar" class="form-text">
-                      Keramik
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <span class="form-text fs-5">
-                      +
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <input type="text" name="var01" class="form-control text-center" size="1" value="10" aria-describedby="KijingSedang" readonly>
-                  </div>
-                  <div class="col-auto">
-                    <span id="KijingSedang" class="form-text">
-                      Besi
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <span class="form-text fs-5">
-                      +
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <input type="text" name="var02" class="form-control text-center" size="1" value="6" aria-describedby="KijingKecil" readonly>
-                  </div>
-                  <div class="col-auto">
-                    <span id="KijingKecil" class="form-text">
-                      Bahan Cor
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <span class="form-text fs-5">
-                      =
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <input type="text" id="b1k1" name="var03" class="form-control text-center" size="1" required>
+                <!-- ini yang Baru -->
+                <div class="d-grid gap-3">
+
+                  <div class="row g-3 align-items-center">
+                    <!-- Persamaan 1 -->
+                    <div class="col-auto">
+                      <label for="b1k1" class="col-form-label">Pers 1</label>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" name="var00" class="form-control text-center" size="1" value="15" aria-describedby="KijingBesar" readonly>
+                    </div>
+                    <div class="col-auto">
+                      <span id="KijingBesar" class="form-text">
+                        Uk. Besar
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text fs-5">
+                        +
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" name="var01" class="form-control text-center" size="1" value="10" aria-describedby="KijingSedang" readonly>
+                    </div>
+                    <div class="col-auto">
+                      <span id="KijingSedang" class="form-text">
+                        Uk. Sedang
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text fs-5">
+                        +
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" name="var02" class="form-control text-center" size="1" value="6" aria-describedby="KijingKecil" readonly>
+                    </div>
+                    <div class="col-auto">
+                      <span id="KijingKecil" class="form-text">
+                        Uk. Kecil
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text fs-5">
+                        =
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" id="b1k1" name="var03" class="form-control text-center" size="1" required>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text">
+                        Keramik
+                      </span>
+                    </div>
                   </div>
 
                   <!-- Persamaan 2 -->
-                  <div class="col-auto">
-                    <label for="b2k1" class="col-form-label">Persamaan 2</label>
-                  </div>
-                  <div class="col-auto">
-                    <input type="text" name="var10" class="form-control text-center" size="1" value="12" aria-describedby="KijingBesar" readonly>
-                  </div>
-                  <div class="col-auto">
-                    <span id="KijingBesar" class="form-text">
-                      Keramik
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <span class="form-text fs-5">
-                      +
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <input type="text" name="var11" class="form-control text-center" size="1" value="6" aria-describedby="KijingSedang" readonly>
-                  </div>
-                  <div class="col-auto">
-                    <span id="KijingSedang" class="form-text">
-                      Besi
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <span class="form-text fs-5">
-                      +
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <input type="text" name="var12" class="form-control text-center" size="1" value="2" aria-describedby="KijingKecil" readonly>
-                  </div>
-                  <div class="col-auto">
-                    <span id="KijingKecil" class="form-text">
-                      Bahan Cor
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <span class="form-text fs-5">
-                      =
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <input id="b2k1" type="text" name="var13" class="form-control text-center" size="1" required>
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <label for="b2k1" class="col-form-label">Pers 2</label>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" name="var10" class="form-control text-center" size="1" value="12" aria-describedby="KijingBesar" readonly>
+                    </div>
+                    <div class="col-auto">
+                      <span id="KijingBesar" class="form-text">
+                        Uk. Besar
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text fs-5">
+                        +
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" name="var11" class="form-control text-center" size="1" value="6" aria-describedby="KijingSedang" readonly>
+                    </div>
+                    <div class="col-auto">
+                      <span id="KijingSedang" class="form-text">
+                        Uk. Sedang
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text fs-5">
+                        +
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" name="var12" class="form-control text-center" size="1" value="2" aria-describedby="KijingKecil" readonly>
+                    </div>
+                    <div class="col-auto">
+                      <span id="KijingKecil" class="form-text">
+                        Uk. Kecil
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text fs-5">
+                        =
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <input id="b2k1" type="text" name="var13" class="form-control text-center" size="1" required>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text">
+                        Besi
+                      </span>
+                    </div>
                   </div>
 
                   <!-- Persamaan 3 -->
-                  <div class="col-auto">
-                    <label for="b3k1" class="col-form-label">Persamaan 2</label>
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <label for="b3k1" class="col-form-label">Pers 3</label>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" name="var20" class="form-control text-center" size="1" value="12" aria-describedby="KijingBesar" readonly>
+                    </div>
+                    <div class="col-auto">
+                      <span id="KijingBesar" class="form-text">
+                        Uk. Besar
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text fs-5">
+                        +
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" name="var21" class="form-control text-center" size="1" value="6" aria-describedby="KijingSedang" readonly>
+                    </div>
+                    <div class="col-auto">
+                      <span id="KijingSedang" class="form-text">
+                        Uk. Sedang
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text fs-5">
+                        +
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <input type="text" name="var22" class="form-control text-center" size="1" value="3" aria-describedby="KijingKecil" readonly>
+                    </div>
+                    <div class="col-auto">
+                      <span id="KijingKecil" class="form-text">
+                        Uk. Kecil
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text fs-5">
+                        =
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <input id="b3k1" type="text" name="var23" class="form-control text-center" size="1" required>
+                    </div>
+                    <div class="col-auto">
+                      <span class="form-text">
+                        Bahan Cor
+                      </span>
+                    </div>
                   </div>
-                  <div class="col-auto">
-                    <input type="text" name="var20" class="form-control text-center" size="1" value="12" aria-describedby="KijingBesar" readonly>
+                  <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                      <input type="submit" value="Submit" name="submit" class="btn btn-success">
+                    </div>
                   </div>
-                  <div class="col-auto">
-                    <span id="KijingBesar" class="form-text">
-                      Keramik
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <span class="form-text fs-5">
-                      +
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <input type="text" name="var21" class="form-control text-center" size="1" value="6" aria-describedby="KijingSedang" readonly>
-                  </div>
-                  <div class="col-auto">
-                    <span id="KijingSedang" class="form-text">
-                      Besi
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <span class="form-text fs-5">
-                      +
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <input type="text" name="var22" class="form-control text-center" size="1" value="3" aria-describedby="KijingKecil" readonly>
-                  </div>
-                  <div class="col-auto">
-                    <span id="KijingKecil" class="form-text">
-                      Bahan Cor
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <span class="form-text fs-5">
-                      =
-                    </span>
-                  </div>
-                  <div class="col-auto">
-                    <input id="b3k1" type="text" name="var23" class="form-control text-center" size="1" required>
-                  </div>
-                  <div class="col-auto">
-                    <input type="submit" value="Submit" name="submit" class="btn btn-success">
-                  </div>
-
                 </div>
 
                 <!-- ini yang Lama -->
@@ -381,13 +426,13 @@ function ubah($persamaan)
 
               <?php
               if (isset($_GET['submit'])) {
-                echo '<h1>Hasil dalam bentuk matriks</h1>';
+                echo '<hr><h2>Hasil dalam bentuk matriks</h2>';
                 setcookie('jumlah_persamaan', 3);
 
                 if (isset($_COOKIE['jumlah_persamaan'])) {
                   $jumlah_persamaan = $_COOKIE['jumlah_persamaan'];
                   buatArray($jumlah_persamaan);
-                  echo '<h3>Tampilan Matrik Pertama</h3>';
+                  echo '<h3 class="text-muted">Tampilan Matrik Pertama</h3>';
                   tampilkanMatrik($koefisien);
                   ubah($jumlah_persamaan);
                   kesimpulan($jumlah_persamaan);
@@ -438,10 +483,11 @@ function ubah($persamaan)
             <div class="portfolio-info">
               <h3>Data Diri</h3>
               <ul>
-                <li><strong>Nama Lengkap</strong> <span>Web design</span></li>
-                <li><strong>Alamat</strong> <span>ASUS Company</span></li>
-                <li><strong>Nomor HP</strong> <span>01 March, 2020</span></li>
-                <li><strong>Pekerjaan</strong> <a href="#">www.example.com</a></li>
+                <li><strong>Nama Lengkap</strong><span><?= $_COOKIE['__nn__']; ?></span></li>
+                <li><strong>Alamat</strong><span><?= $_COOKIE['_adss__']; ?></span></li>
+                <li><strong>Nomor HP</strong><span><?= $_COOKIE['p']; ?></span></li>
+                <li><strong>Pekerjaan</strong><span><?= $_COOKIE['_jbjb_']; ?></span>
+                </li>
                 <!-- <li><a href="#" class="btn-visit align-self-start">Visit Website</a></li> -->
               </ul>
             </div>
@@ -460,11 +506,11 @@ function ubah($persamaan)
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span>Impact</span>
+          <a href="./" class="logo d-flex align-items-center">
+            <span>Kijing</span>
           </a>
-          <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta
-            donna mare fermentum iaculis eu non diam phasellus.</p>
+          <p>Menurut bahasa, kijing adalah batu penutup makam dipadukan dengan lempengan makam (dari marmer, ubin atau
+            semen).</p>
           <div class="social-links d-flex mt-4">
             <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
             <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
@@ -474,33 +520,31 @@ function ubah($persamaan)
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Useful Links</h4>
+          <h4>Navigasi</h4>
           <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#objek">Objek Permasalahan</a></li>
+            <li><a href="#petunjuk">Petunjuk Penggunaan</a></li>
+            <li><a href="#hasil">Hasil Produk</a></li>
+            <li><a href="#team">Pengembang</a></li>
           </ul>
         </div>
 
         <div class="col-lg-2 col-6 footer-links">
-          <h4>Our Services</h4>
+          <h4>Get Started</h4>
           <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
+            <li><a href="login">Login</a></li>
+            <li><a href="g">Gauss Jordan</a></li>
           </ul>
         </div>
 
         <div class="col-lg-3 col-md-12 footer-contact text-center text-md-start">
-          <h4>Contact Us</h4>
+          <h4>Universitas Janabadra</h4>
           <p>
-            A108 Adam Street <br>
-            New York, NY 535022<br>
-            United States <br><br>
+            Jl. Tentara Rakyat Mataram No.58,<br>
+            Bumijo, Kec. Jetis, <br>
+            Kota Yogyakarta, Daerah Istimewa Yogyakarta <br>
+            55231<br><br>
             <strong>Phone:</strong> +1 5589 55488 55<br>
             <strong>Email:</strong> info@example.com<br>
           </p>
@@ -512,15 +556,14 @@ function ubah($persamaan)
 
     <div class="container mt-4">
       <div class="copyright">
-        &copy; Copyright <strong><span>Impact</span></strong>. All Rights Reserved
+        &copy; Copyright 2022 <strong><span>Kijing</span></strong>. All Rights Reserved
       </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/impact-bootstrap-business-website-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
+      <!-- <div class="credits"> -->
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/impact-bootstrap-business-website-template/ -->
+      <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
     </div>
 
   </footer><!-- End Footer -->
