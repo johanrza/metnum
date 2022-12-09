@@ -82,12 +82,12 @@ function kesimpulan($jumlah_persamaan)
 {
   global $koefisien;
   echo 'Sehingga: <br>';
-  $persediaan = ['Keramik = ', 'Besi = ', 'Bahan Cor = '];
+  $persediaan = ['Kijing Besar : ', 'Kijing Sedang : ', 'Kijing Kecil : '];
   for ($i = 0; $i < $jumlah_persamaan; $i++) {
-    echo $persediaan[$i];
+    echo "$persediaan[$i]";
     for ($j = 0; $j < $jumlah_persamaan + 1; $j++) {
       if ($j == $jumlah_persamaan) {
-        echo $koefisien[$i][$j] . '<br>';
+        echo $koefisien[$i][$j];
       }
     }
   }
@@ -226,7 +226,7 @@ function ubah($persamaan)
             <div class="portfolio-description">
               <h2>Perhitungan Gauss Jordan</h2>
               <h6 class="mb-3">Masukan jumlah bahan</h6>
-              <form action="<?php $_SERVER['PHP_SELF'] ?>" method="GET">
+              <form action="<?php $_SERVER['PHP_SELF'] ?>#hasil-hitung" method="GET">
                 <!-- ini yang Baru -->
                 <div class="d-grid gap-3">
 
@@ -275,7 +275,7 @@ function ubah($persamaan)
                       </span>
                     </div>
                     <div class="col-auto">
-                      <input type="text" id="b1k1" name="var03" class="form-control text-center" size="1" required>
+                      <input type="text" id="b1k1" name="var03" class="form-control text-center" size="1" autocomplete="off" required>
                     </div>
                     <div class="col-auto">
                       <span class="form-text">
@@ -329,7 +329,7 @@ function ubah($persamaan)
                       </span>
                     </div>
                     <div class="col-auto">
-                      <input id="b2k1" type="text" name="var13" class="form-control text-center" size="1" required>
+                      <input id="b2k1" type="text" name="var13" class="form-control text-center" size="1" autocomplete="off" required>
                     </div>
                     <div class="col-auto">
                       <span class="form-text">
@@ -383,7 +383,7 @@ function ubah($persamaan)
                       </span>
                     </div>
                     <div class="col-auto">
-                      <input id="b3k1" type="text" name="var23" class="form-control text-center" size="1" required>
+                      <input id="b3k1" type="text" name="var23" class="form-control text-center" size="1" required autocomplete="off">
                     </div>
                     <div class="col-auto">
                       <span class="form-text">
@@ -393,7 +393,7 @@ function ubah($persamaan)
                   </div>
                   <div class="row g-3 align-items-center">
                     <div class="col-auto">
-                      <input type="submit" value="Submit" name="submit" class="btn btn-success">
+                      <input type="submit" value="Hitung" name="submit" class="btn btn-success">
                     </div>
                   </div>
                 </div>
@@ -426,7 +426,7 @@ function ubah($persamaan)
 
               <?php
               if (isset($_GET['submit'])) {
-                echo '<hr><h2>Hasil dalam bentuk matriks</h2>';
+                echo '<hr id="hasil-hitung"><h2>Hasil dalam bentuk matriks</h2>';
                 setcookie('jumlah_persamaan', 3);
 
                 if (isset($_COOKIE['jumlah_persamaan'])) {

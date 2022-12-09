@@ -64,19 +64,19 @@ if (isset($_GET["login"])) {
               <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="GET">
                 <div class="form-group">
                   <label for="nama">Nama Lengkap</label>
-                  <input type="text" name="nama" class="form-control" id="nama">
+                  <input type="text" name="nama" class="form-control" id="nama" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="alamat">Alamat</label>
-                  <input type="text" name="alamat" class="form-control" id="alamat">
+                  <input type="text" name="alamat" class="form-control" id="alamat" autocomplete="off">
                 </div>
                 <div class="form-group">
                   <label for="no">Nomor HP</label>
-                  <input type="number" name="hp" class="form-control" id="no">
+                  <input type="number" name="hp" class="form-control" id="no" autocomplete="off">
                 </div>
                 <div class="form-group mb-4">
                   <label for="kerja">Pekerjaan</label>
-                  <input type="text" name="pekerjaan" class="form-control" id="kerja">
+                  <input type="text" name="pekerjaan" class="form-control" id="kerja" autocomplete="off">
                 </div>
 
                 <!-- <div class="d-flex mb-5 align-items-center">
