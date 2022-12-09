@@ -82,12 +82,12 @@ function kesimpulan($jumlah_persamaan)
 {
   global $koefisien;
   echo 'Sehingga: <br>';
-  $persediaan = ['Kijing Besar : ', 'Kijing Sedang : ', 'Kijing Kecil : '];
+  $persediaan = ['Kijing Besar = ', 'Kijing Sedang = ', 'Kijing Kecil = '];
   for ($i = 0; $i < $jumlah_persamaan; $i++) {
     echo "$persediaan[$i]";
     for ($j = 0; $j < $jumlah_persamaan + 1; $j++) {
       if ($j == $jumlah_persamaan) {
-        echo $koefisien[$i][$j];
+        echo $koefisien[$i][$j] . "<br>";
       }
     }
   }
@@ -427,7 +427,6 @@ function ubah($persamaan)
               <?php
               if (isset($_GET['submit'])) {
                 echo '<hr id="hasil-hitung"><h2>Hasil dalam bentuk matriks</h2>';
-                setcookie('jumlah_persamaan', 3);
 
                 if (isset($_COOKIE['jumlah_persamaan'])) {
                   $jumlah_persamaan = $_COOKIE['jumlah_persamaan'];

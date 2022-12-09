@@ -16,6 +16,7 @@ if (isset($_GET["login"])) {
   setcookie("_adss__", $alamat);
   setcookie("p", $noHp);
   setcookie("_jbjb_", $kerjaan);
+  setcookie('jumlah_persamaan', 3);
 
   $_SESSION["login"] = true;
   header("Location: g");
